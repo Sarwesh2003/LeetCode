@@ -1,15 +1,22 @@
 class MyQueue {
     Stack<Integer> s1;
     Stack<Integer> s2;
+    int rear;
     public MyQueue() {
         s1 = new Stack<>();
         s2 = new Stack<>();
+        rear = -1;
     }
-    
+    private void shift(){
+        while(!s1.empty()){
+            s2.push(s1.pop());
+        }
+    }
     public void push(int x) {
-        // s1.push(x);
+        rear++;
+        s1.push(x);
         // shift();
-        reverse(s1, x);
+        // reverse(s1, x);
     }
     private void reverse(Stack<Integer> s,int n){
         if(s.empty()){
@@ -22,22 +29,27 @@ class MyQueue {
         s.push(num);
     }
     public int pop() {
-        if(!empty()){
-            return s1.pop();
+        if(s2.empty()){
+            shift();
+            rear--;
+            return s2.pop();
         }
-        return -1;
+        int x = s2.pop();
+        rear--;
+        return x;
     }
     
   
     public int peek() {
-        if(!empty()){
-            return s1.peek();
+        if(s2.empty()){
+            shift();
+            return s2.peek();
         }
-        return -1;
+        return s2.peek();
     }
     
     public boolean empty() {
-        return s1.empty();
+        return rear == -1;
     }
 }
 
