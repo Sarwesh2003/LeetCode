@@ -17,15 +17,28 @@ class Solution {
     public int diameterOfBinaryTree(TreeNode root) {
         if(root == null) return 0;
         
-        int opt1 = diameterOfBinaryTree(root.left);
-        int opt2 = diameterOfBinaryTree(root.right);
-        int opt3 = height(root.left) + height(root.right) ;
+        int[] ans = diameter(root);
         
-        int ans = Math.max(opt1, Math.max(opt2, opt3));
-        return ans;
+        return ans[0];
     }
     
     
+    private int[] diameter(TreeNode root){
+        if(root == null){
+            return new int[]{0, 0};
+        }
+        int[] left = diameter(root.left);
+        int[] right = diameter(root.right);
+        
+        int both = left[1] + right[1];
+        
+        int[] ans = new int[2];
+        ans[0] = Math.max(left[0], Math.max(right[0], both));
+        ans[1] = Math.max(left[1], right[1]) + 1;
+        return ans;
+    }
+    
+    //O(N^2) Approach
     int height(TreeNode root){
         if(root == null){
             return 0;
