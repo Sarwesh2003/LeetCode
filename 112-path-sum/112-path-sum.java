@@ -19,25 +19,25 @@ class Solution {
             return false;
         }
         
-        Stack<Integer> sum = new Stack<>();
-        Stack<TreeNode> s = new Stack<>();
-        s.push(root);
-        sum.push(root.val);
-        while(!s.empty()){
-            TreeNode node = s.pop();
-            int currSum = sum.pop();
+        Queue<Integer> sum = new LinkedList<>();
+        Queue<TreeNode> s = new LinkedList<>();
+        s.add(root);
+        sum.add(root.val);
+        while(s.size() > 0){
+            TreeNode node = s.remove();
+            int currSum = sum.remove();
             if(currSum == targetSum && node.right == null && node.left == null){
                 return true;
             }
             
             if(node.right != null){
-                s.push(node.right);
-                sum.push(currSum + node.right.val);
+                s.add(node.right);
+                sum.add(currSum + node.right.val);
             }
             
             if(node.left != null){
-                s.push(node.left);
-                sum.push(currSum + node.left.val);
+                s.add(node.left);
+                sum.add(currSum + node.left.val);
             }
         }
         return false;
