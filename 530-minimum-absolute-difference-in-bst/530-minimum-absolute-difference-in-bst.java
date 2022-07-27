@@ -15,39 +15,20 @@
  */
 class Solution {
     int minDiff = Integer.MAX_VALUE;
+    Integer prev = null;
     public int getMinimumDifference(TreeNode root) {
-        TreeNode curr = root;
-        while(curr != null){
-            if(curr.left != null){
-                TreeNode p = curr.left;
-                while(p.right != null){
-                    p = p.right;
-                }
-                p.right = curr.right;
-                curr.right = curr.left;
-            }
-            curr.left = null;
-            curr = curr.right;
+        if(root == null){
+            return 0;
         }
         
-        TreeNode temp = root;
-        int min = Integer.MAX_VALUE;
-        while(temp.right != null){
-            TreeNode temp1 = temp.right;
-            while(temp1 != null){
-                int diff = Math.abs(temp.val - temp1.val);
-                min = Math.min(diff, min);
-                temp1 = temp1.right;
-            }
-            temp = temp.right;
+        getMinimumDifference(root.left);
+        if(prev != null){
+            minDiff = Math.min(minDiff, Math.abs(root.val - prev));
         }
-        return min;
+        prev = root.val;
+        
+        getMinimumDifference(root.right);
+        
+        return minDiff;
     }
-    
-    // public void solve(TreeNode root, int found){
-    //     if(root == null){
-    //         return 0;
-    //     }
-    //     if(root.val < minDiff)
-    // }
 }
