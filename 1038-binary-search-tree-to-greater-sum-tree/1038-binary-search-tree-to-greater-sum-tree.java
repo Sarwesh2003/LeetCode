@@ -14,10 +14,19 @@
  * }
  */
 class Solution {
+    int sum = 0;
     public TreeNode bstToGst(TreeNode root) {
-        ArrayList<Integer> list = new ArrayList<>();
-        solve(root, list);
-        assign(root, list);
+        // ArrayList<Integer> list = new ArrayList<>();
+        // solve(root, list);
+        // assign(root, list);
+        // return root;
+        if(root == null){
+            return null;
+        }
+        bstToGst(root.right);
+        root.val += sum;
+        sum = root.val;
+        bstToGst(root.left);
         return root;
     }
     public void solve(TreeNode root, ArrayList<Integer> list){
