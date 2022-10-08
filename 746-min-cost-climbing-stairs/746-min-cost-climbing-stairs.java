@@ -1,7 +1,9 @@
 class Solution {
     public int minCostClimbingStairs(int[] cost) {
         int n = cost.length;
-        int ans = Math.min(solve(n - 1, cost), solve(n - 2, cost));
+        int[] dp = new int[n + 1];
+        Arrays.fill(dp, 0, dp.length, -1);
+        int ans = Math.min(memo(n - 1, cost, dp), memo(n - 2, cost, dp));
         return ans;
     }
     // Recursion solution - TLE
@@ -10,14 +12,11 @@ class Solution {
             return cost[0];
         if(n == 1)
             return cost[1];
-        
-        int[] dp = new int[n + 1];
-        Arrays.fill(dp, 0, dp.length, -1);
-        int c = cost[n] + Math.min(memo(n - 1, cost, dp), memo(n - 2, cost, dp));
+        int c = cost[n] + Math.min(solve(n - 1, cost), solve(n - 2, cost));
         return c;
     }
     
-    //Memoization
+    //Memoization - Accepted
     public int memo(int n, int[] cost, int[] dp){
         if(n == 0 || n == 1)
             return cost[n];
@@ -26,6 +25,16 @@ class Solution {
             return dp[n];
         
         dp[n] = cost[n] + Math.min(memo(n - 1, cost, dp), memo(n - 2, cost, dp));
+        return dp[n];
+    }
+    
+    public int tab(int n, int[] cost, int[] dp){
+        dp[0] = cost[0];
+        dp[1] = cost[1];
+        
+        for(int i = 2; i <= n; ++i){
+            dp[i] = cost[i] + Math.min(dp[i - 1], dp[i -2]);
+        }
         return dp[n];
     }
 }
