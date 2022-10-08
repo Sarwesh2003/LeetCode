@@ -3,7 +3,7 @@ class Solution {
         int n = cost.length;
         int[] dp = new int[n + 1];
         Arrays.fill(dp, 0, dp.length, -1);
-        int ans = Math.min(memo(n - 1, cost, dp), memo(n - 2, cost, dp));
+        int ans = Math.min(tab(n - 1, cost, dp), tab(n - 2, cost, dp));
         return ans;
     }
     // Recursion solution - TLE
