@@ -2,9 +2,10 @@ class Solution {
     public int minCostClimbingStairs(int[] cost) {
         int n = cost.length;
         int[] dp = new int[n + 1];
-        Arrays.fill(dp, 0, dp.length, -1);
-        int ans = Math.min(tab(n - 1, cost, dp), tab(n - 2, cost, dp));
-        return ans;
+        // Arrays.fill(dp, 0, dp.length, -1);
+        // int ans = Math.min(memo(n - 1, cost, dp), memo(n - 2, cost, dp));
+        
+        return tab(n, cost,dp);
     }
     // Recursion solution - TLE
     public int solve(int n, int[] cost){
@@ -32,9 +33,9 @@ class Solution {
         dp[0] = cost[0];
         dp[1] = cost[1];
         
-        for(int i = 2; i <= n; ++i){
+        for(int i = 2; i < n; ++i){
             dp[i] = cost[i] + Math.min(dp[i - 1], dp[i -2]);
         }
-        return dp[n];
+        return Math.min(dp[n - 1], dp[n - 2]);
     }
 }
