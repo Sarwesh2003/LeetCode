@@ -27,7 +27,7 @@ class Solution {
     public boolean isValid(String str) {
         Stack<Character> s = new Stack<>();
         for(char ch : str.toCharArray()){
-            if(isOpening(ch)){
+            if(ch == '('){
                 s.push(ch);
             }else{
                 if(s.empty()){
@@ -48,8 +48,5 @@ class Solution {
             return true;
         }
         return false;
-    }
-    private boolean isOpening(char ch){
-        return ch == '(' || ch == '{' || ch == '[';
     }
 }
