@@ -1,17 +1,41 @@
 class Solution {
     public List<String> generateParenthesis(int n) {
-        List<String> ans = solve(n);
+        // Bruteforce
+        // List<String> ans = bruteforce(n);
+        List<String> ans = new ArrayList<>();
+        optimized(ans, 0, 0, new StringBuilder(), n);
         return ans;
     }
     
-    public List<String> solve(int n){
+    public void optimized(List<String> ans, int left, int right, StringBuilder s, int n){
+        if(s.length() == (2 * n)){
+            ans.add(s.toString());
+            return;
+        }
+        
+        
+        if(left < n){
+            s.append('(');
+            optimized(ans, left + 1, right, s, n);
+            s.delete(s.length() - 1, s.length());
+        }
+        
+        if(right < left){
+            s.append(')');
+            optimized(ans, left, right + 1, s, n);
+            s.delete(s.length() - 1, s.length());
+        }
+        
+    }
+    
+    public List<String> bruteforce(int n){
         if(n == 1){
             List<String> ans = new ArrayList<String>();
             ans.add("()");
             return ans;
         }
         
-        List<String> res = solve(n - 1);
+        List<String> res = bruteforce(n - 1);
         List<String> ans = new ArrayList<>();
         for(String temp : res){
             for(int i = 0; i < temp.length(); ++i){
