@@ -26,18 +26,14 @@ class Solution {
     
     public boolean isValid(String str) {
         Stack<Character> s = new Stack<>();
+        // int i = 0;
         for(char ch : str.toCharArray()){
             if(ch == '('){
                 s.push(ch);
             }else{
                 if(s.empty()){
                     return false;
-                }
-                if(ch == ']' && s.peek() == '['){
-                    s.pop();
                 }else if(ch == ')'&& s.peek() == '('){
-                    s.pop();
-                }else if(ch == '}' && s.peek() == '{'){
                     s.pop();
                 }else{
                     return false;
