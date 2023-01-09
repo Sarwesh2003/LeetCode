@@ -34,18 +34,34 @@ public class Main {
 
 class Solution {
     int print2largest(int arr[], int n) {
-        Arrays.sort(arr);
+        // Arrays.sort(arr);
+        // int max = Integer.MIN_VALUE;
+        // int min = Integer.MIN_VALUE;
+        // for(int i : arr){
+        //     if(max < i){
+        //         min = max;
+        //         max = i;
+        //     }
+        // }
+        // if(min != Integer.MIN_VALUE){
+        //     return min;
+        // }
+        
         int max = Integer.MIN_VALUE;
-        int min = Integer.MIN_VALUE;
+        int smax = Integer.MIN_VALUE;
+        
         for(int i : arr){
             if(max < i){
-                min = max;
                 max = i;
             }
         }
-        if(min != Integer.MIN_VALUE){
-            return min;
+        for(int i : arr){
+            if(smax < i && i != max){
+                smax = i;
+            }
         }
+        if(smax != Integer.MIN_VALUE)
+            return smax;
         return -1;
     }
 }
