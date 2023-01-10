@@ -53,33 +53,18 @@ class Solution
 {
     public static ArrayList<Integer> findUnion(int arr1[], int arr2[], int n, int m){
         ArrayList<Integer> ans = new ArrayList<>();
-        SortedSet<Integer> set = new TreeSet<>();
-        int i = 0, j = 0;
-        while(i < n && j < m){
-            if(arr1[i] > arr2[j]){
-                set.add(arr2[j]);
-                ++j;
-            }else if(arr1[i] < arr2[j]){
-                set.add(arr1[i]);
-                ++i;
-            }else{
-                set.add(arr1[i]);
-                ++i;
-                ++j;
-            }
+        
+        HashMap<Integer, Integer> map = new HashMap<>();
+        for(int i = 0; i < n; ++i){
+            map.put(arr1[i], map.getOrDefault(arr1[i], 0) + 1);
         }
-        while(i < n){
-            set.add(arr1[i]);
-            ++i;
+        for(int i = 0; i < m; ++i){
+            map.put(arr2[i], map.getOrDefault(arr2[i], 0) + 1);
         }
-        while(j < m){
-            set.add(arr2[j]);
-            ++j;
-        }
-        for(int element : set){
+        for(int element : map.keySet()){
             ans.add(element);
         }
-        
+        Collections.sort(ans);
         return ans;
     }
 }
