@@ -40,10 +40,10 @@ class Compute {
     public static int missingNumber(int A[], int N)
     {
          int[] vis = new int[N + 1];
-         for(int i = 0; i < N; ++i){
+         for(int i = 0; i < N-1; ++i){
              vis[A[i]]++;
          }
-         for(int i = 0; i <= N; ++i){
+         for(int i = 1; i <= N; ++i){
              if(vis[i] == 0){
                  return i;
              }
