@@ -61,7 +61,8 @@ class Solution
     //             arr2[j - 1] = first;
     //         }
     //     }
-        int gap = (int)Math.ceil((double)n + m / 2.0);
+        int gap = (int)Math.ceil((double)(n + m) / 2.0);
+        // System.out.println((n + m) / 2);
         while(gap > 0){
             int i = 0, j = gap;
             while(j < (n + m)){
@@ -78,7 +79,9 @@ class Solution
             if(gap == 1){
                 gap = 0;
             }else{
+                // gap = (int)Math.ceil((double)gap / 2.0);
                 gap = (int)Math.ceil((double)gap / 2.0);
+                // System.out.println(gap);
             }
             
         }
