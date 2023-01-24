@@ -31,12 +31,30 @@ public class GFG
 
 class Solution 
 {
-    int findOnce(int nums[], int k)
+    int findOnce(int arr[], int n)
     {
-        int xor = 0;
-        for(int n : nums){
-            xor ^= n;
+        // int xor = 0;
+        // for(int n : nums){
+        //     xor ^= n;
+        // }
+        // return xor;
+        int s = 0, mid = 0, e = n - 1;
+        while(s < e){
+            mid = s + (e - s) / 2;
+            if(mid % 2 == 0){
+                if(arr[mid] == arr[mid + 1]){
+                    s = mid + 2;
+                }else{
+                    e = mid;    
+                }
+            }else if(mid % 2 != 0){
+                if(arr[mid] == arr[mid - 1]){
+                    s = mid + 1;
+                }else{
+                    e = mid - 1;
+                }
+            }
         }
-        return xor;
+        return arr[s];
     }
 }
