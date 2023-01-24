@@ -42,10 +42,21 @@ class Solution
         if(arr[s] < arr[e]){
             return arr[s];
         }
-        int i = 0;
-        while(i < n - 1 && arr[i] < arr[i + 1]){
-            ++i;
+        int min = Integer.MAX_VALUE;
+        while(s <= e){
+            if(arr[s] < arr[e]){
+                min = Math.min(min, arr[s]);
+                return min;
+            }
+            m = s + (e - s) / 2;
+            if(arr[s] <= arr[m]){
+                min = Math.min(min, arr[s]);
+                s = m + 1;
+            }else{
+                min = Math.min(min, arr[m]);
+                e = m - 1;
+            }
         }
-        return arr[i + 1];
+        return min;
     }
 }
