@@ -61,7 +61,7 @@ class Solution {
             
             if(l1 <= r2 && l2 <= r1){
                 return (long)Math.max(l1, l2);
-            }else if(l1 > l2){
+            }else if(l1 > r2){
                 high = cut1 - 1;
             }else{
                 low = cut1 + 1;
