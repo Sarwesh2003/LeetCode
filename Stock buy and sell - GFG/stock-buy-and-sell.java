@@ -29,35 +29,25 @@ class GFG {
 // User function Template for Java
 
 class Solution {
-    class Interval{
-        int buy, sell;
-    }
     public void stockBuySell(int[] price, int n) {
-        ArrayList<Interval> list = new ArrayList<Interval>();
+        ArrayList<int[]> list = new ArrayList<>();
         int i = 0;
-        int count = 0;
-        while(i < n-1){
-            while(i < n - 1 && price[i + 1] <= price[i])i++;
+        while(i < n - 1){
+            while(i < n - 1 && price[i + 1] <= price[i])++i;
             
             if(i == n - 1)break;
             
-            Interval e = new Interval();
+            int p1 = i++;
+            while(i < n && price[i] >= price[i - 1])++i;
             
-            e.buy = i++;
-            
-            while(i < n && price[i] >= price[i - 1])i++;
-            
-            e.sell = i - 1;
-            list.add(e);
-            count++;
+            list.add(new int[]{p1, i - 1});
         }
-        if(count == 0){
+        if(list.size() < 1){
             System.out.println("No Profit");
             return;
         }
-        for(i = 0; i < count; ++i){
-            Interval in = list.get(i);
-            System.out.print("("+in.buy + " " + in.sell +") ");
+        for(int[] profit : list){
+            System.out.print("("+profit[0]+" "+profit[1]+") ");
         }
         System.out.println();
     }
