@@ -31,26 +31,23 @@ class GfG
 {
     int maxLen(int arr[], int n)
     {
-        if(n == 1 && arr[0] == 0){
-            return 1;
-        }
-        int max = 0;
         HashMap<Integer, Integer> map = new HashMap<>();
         int sum = 0;
+        int max = Integer.MIN_VALUE;
         for(int i = 0; i < n; ++i){
+            
             sum += arr[i];
             if(sum == 0){
                 max = i + 1;
-            }else{
-                if(!map.containsKey(sum)){
-                map.put(sum, i);
-                }else{
-                    max = Math.max(max, i - map.get(sum));
-                }
+                continue;
             }
-            
-            
+            if(map.containsKey(sum)){
+                max = Math.max(max, i - map.get(sum));
+            }else{
+                map.put(sum, i);
+            }
         }
-        return max;
+
+        return max == Integer.MIN_VALUE ? 0 : max;
     }
 }
