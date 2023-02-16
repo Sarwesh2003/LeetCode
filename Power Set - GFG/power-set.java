@@ -33,8 +33,16 @@ class Solution
     public List<String> AllPossibleStrings(String s)
     {
         List<String> ans = new ArrayList<>();
-        for(int i = 0; i < s.length() + 1; ++i){
-            solve(s, 0, new StringBuilder(""), i, ans);
+        int pow = (int)Math.pow(2, s.length());
+        for(int i = 0; i < pow; ++i){
+             String str = "";
+             for(int j = 0; j < s.length(); ++j){
+                 if((i & (1 << j)) != 0){
+                     str += s.charAt(j);
+                 }
+             }
+             if(str != "")
+                ans.add(str);
         }
         Collections.sort(ans);
         return ans;
