@@ -30,12 +30,6 @@ class Solution
                 if(s.size() >= 2){
                     res = eval(ch, s.pop(), s.pop());
                     s.push(res);
-                }else if(!s.isEmpty()){
-                    if(ch == '+')res = s.pop();
-                    else if(ch == '-')res = s.pop();
-                    else if(ch == '*')res = s.pop();
-                    else res = s.pop();
-                    s.push(res);
                 }
             }
         }
