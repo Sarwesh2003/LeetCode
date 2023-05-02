@@ -48,7 +48,6 @@ class Solution {
     }
     
     public void dfs(int curr, ArrayList<ArrayList<Integer>> adj, boolean[] vis, ArrayList<Integer> ans){
-        if(vis[curr])return;
         
         ans.add(curr);
         vis[curr] = true;
