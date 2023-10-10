@@ -35,39 +35,41 @@ class Solution
     //Function to find if there is a celebrity in the party or not.
     int celebrity(int M[][], int n)
     {
-        List<Integer> list = new ArrayList<>();
-    	for(int i = 0; i < M.length; ++i){
-    	    boolean flag = true;
-    	    for(int j = 0; j < M[i].length; ++j){
-    	        if(M[i][j] == 1){
-    	            flag = false;
-    	            break;
-    	        }
-    	    }
-    	    if(flag){
-    	        list.add(i);
-    	    }
-    	}
-    	
-    	int sz = list.size();
-    	
-    	if(sz == 0)return -1;
-    	for(int candidate : list){
-    	    boolean flag = true;
-    	    for(int i = 0; i < M.length; ++i){
-    	        if(i != candidate && M[i][candidate] == 0){
-    	            flag = false;
-    	            break;
-    	        }
-    	        if(i != candidate && M[candidate][i] == 1){
-    	            flag = false;
-    	            break;
-    	        }
-    	    }
-    	    if(flag){
-    	        return candidate;
-    	    }
-    	}
-    	return -1;
+        Stack<Integer> s = new Stack<>();
+        for(int i = 0; i < n; ++i){
+            s.push(i);
+        }
+        
+        while(s.size() > 1){
+            int i = s.pop();
+            int j = s.pop();
+            
+            if(M[i][j] == 0 && M[j][i] == 1){
+                s.push(i);
+            }
+            if(M[j][i] == 0 && M[i][j] == 1){
+                s.push(j);
+            }
+        }
+        if(s.empty())return -1;
+        
+        while(!s.empty()){
+            int candidate = s.pop();
+            boolean flag = true;
+            for(int i = 0; i < n; ++i){
+                if(i != candidate && M[candidate][i] == 1){
+                    flag = false;
+                    break;
+                }
+                if(i != candidate && M[i][candidate] == 0){
+                    flag = false;
+                    break;
+                }
+            }
+            if(flag)return candidate;
+        }
+        return -1;
+        
+        
     }
 }
